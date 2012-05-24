@@ -14,7 +14,7 @@ This presentation discusses the compojure-rest library which can be found at htt
 
 # Feedback
 
-I hope you enjoyed the presentation, please contact me if you would like to be involved in improving Clojure's REST support.
+I hope you enjoyed the presentation, please contact me if you would like to be involved in improving Clojure's REST support, or join the clojure-rest Google group discussion :- https://groups.google.com/d/forum/clojure-rest.
 
 
 Malcolm Sparks
