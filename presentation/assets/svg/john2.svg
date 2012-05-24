@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="744.09448"
+   height="1052.3622"
+   id="svg2">
+  <defs
+     id="defs4">
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter3069">
+      <feTurbulence
+         result="result7"
+         numOctaves="3"
+         baseFrequency="0.1"
+         type="fractalNoise"
+         id="feTurbulence3071" />
+      <feColorMatrix
+         type="saturate"
+         result="result8"
+         values="0"
+         id="feColorMatrix3073" />
+      <feColorMatrix
+         type="matrix"
+         result="result6"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -12 "
+         id="feColorMatrix3075" />
+      <feGaussianBlur
+         in="result6"
+         result="result5"
+         stdDeviation="2"
+         id="feGaussianBlur3077" />
+      <feColorMatrix
+         type="matrix"
+         result="result0"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 10 -0.1 "
+         in="result5"
+         id="feColorMatrix3079" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="arithmetic"
+         k1="0.8"
+         k2="1"
+         k3="0"
+         k4="0"
+         in="result0"
+         result="result3"
+         id="feComposite3081" />
+      <feComposite
+         in2="result8"
+         operator="atop"
+         result="result9"
+         id="feComposite3083" />
+      <feBlend
+         in2="SourceGraphic"
+         mode="normal"
+         result="result9"
+         id="feBlend3085" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="atop"
+         in="result9"
+         result="result2"
+         id="feComposite3087" />
+    </filter>
+    <filter
+       x="-0.15000001"
+       y="-0.15000001"
+       width="1.3"
+       height="1.3"
+       color-interpolation-filters="sRGB"
+       id="filter3089">
+      <feTurbulence
+         seed="20"
+         type="fractalNoise"
+         numOctaves="8"
+         baseFrequency="0.005 0.01"
+         result="result1"
+         id="feTurbulence3091" />
+      <feColorMatrix
+         values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.2 -0.4 "
+         result="result3"
+         id="feColorMatrix3093" />
+      <feConvolveMatrix
+         result="result8"
+         divisor="2"
+         targetY="1"
+         targetX="1"
+         kernelMatrix="3 0 0 0 2 0 0 0 -1 "
+         order="3 3"
+         id="feConvolveMatrix3095" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="atop"
+         in="result8"
+         result="fbSourceGraphic"
+         id="feComposite3097" />
+      <feTurbulence
+         seed="20"
+         type="turbulence"
+         numOctaves="7"
+         baseFrequency="0.027 0.025"
+         id="feTurbulence3099" />
+      <feColorMatrix
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 4.7 -2 "
+         id="feColorMatrix3101" />
+      <feComposite
+         in2="result5"
+         operator="in"
+         in="fbSourceGraphic"
+         result="result6"
+         id="feComposite3103" />
+      <feDisplacementMap
+         in2="result5"
+         scale="48"
+         xChannelSelector="R"
+         yChannelSelector="A"
+         in="result6"
+         result="result4"
+         id="feDisplacementMap3105" />
+      <feFlood
+         result="result9"
+         flood-opacity="1"
+         flood-color="rgb(222,217,217)"
+         id="feFlood3107" />
+      <feComposite
+         in2="result4"
+         operator="in"
+         result="result2"
+         id="feComposite3109" />
+      <feComposite
+         in2="fbSourceGraphic"
+         operator="atop"
+         in="result2"
+         result="result91"
+         id="feComposite3111" />
+      <feBlend
+         in2="result91"
+         mode="darken"
+         id="feBlend3113" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <rect
+       width="391.42856"
+       height="305.71429"
+       x="45.714287"
+       y="209.50504"
+       id="rect2985"
+       style="fill:#ff6600;stroke:#000000;stroke-width:13.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3089)" />
+    <path
+       d="m 494.28572,268.07648 a 81.428574,130 0 1 1 -162.85715,0 81.428574,130 0 1 1 162.85715,0 z"
+       id="path2987"
+       style="fill:#deaa87;stroke:#000000;stroke-width:13.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="M 288.57142,509.50506 359.52097,408.899 316.86649,293.41736 l 117.60667,36.38805 96.64861,-76.25261 1.73536,123.09511 102.38661,68.35494 -116.53415,39.68891 -33.37021,118.49829 -73.75743,-98.56602 z"
+       id="path2989"
+       style="fill:#483e37;stroke:#000000;stroke-width:13.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3069)" />
+  </g>
+</svg>

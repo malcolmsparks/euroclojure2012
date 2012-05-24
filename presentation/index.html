@@ -1,0 +1,827 @@
+<!doctype html>  
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    
+    <title>EuroClojure2012 - Malcolm Sparks</title>
+
+    <meta name="description" content="An easy to use CSS 3D slideshow tool for quickly creating good looking HTML presentations.">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!--
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        -->
+    
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
+    <link rel="stylesheet" href="lib/zenburn.css">
+  </head>
+  
+  <body>
+    
+    <div id="reveal">
+
+      <!-- Used to fade in a background when a specific slide state is reached -->
+      <div class="state-background"></div>
+      
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section>
+	  <h1>Interactive websites with Clojure, ClojureScript and REST</h1>
+	  <h3 class="inverted">Malcolm Sparks</h3>
+	  <h3 style="text-align:right; font-size: 36pt; position: absolute; right: -60px; bottom: -250px;font-family: Arial" class="inverted">Deutsche Bank <svg height="70" width="70" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <g transform="scale(0.7)">
+      <polyline fill="#eee" points="0,0 100,0 100,100, 0,100, 0,0 14,14 14,86 86,86 86,14, 14,14, 0,0"/>
+      <polyline fill="#eee" points="23,76 41,76 78,24 61,24"/>
+    </g>
+</svg>
+</h3>
+	  <script>
+	    // Delicously hacky. Look away.
+	    if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+	  </script>
+	</section>
+	
+        <section>
+          <section>
+            <h2>The Dream</h2>
+            <h3>Let's open our data!</h3>
+            <img width="474" height="237" src="assets/berners_lee_open_data.jpg">
+          </section>
+
+          <section>
+            <!-- There's never been a better time to open our data -->
+            <ul>
+              <li><a href="http://data.gov">data.gov</a></li>
+              <li><a href="http://data.gov.uk/dataset/os-code-point-open">data.gov.uk</a></li>
+              <li><a href="http://www.freebase.com">Freebase</a></li>
+              <li><a href="http://www.openstreetmap.org/">Open Street Map</a></li>
+              <li><a href="http://www.ordnancesurvey.co.uk/oswebsite/products/os-opendata.html">Ordnance Survey</a></li>
+              <li><a href="http://wiki.dbpedia.org/Datasets">DBpedia</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>For example...</h2>
+            <h3>Train company data</h3>
+            <p><a href="http://data.atoc.org/">http://data.atoc.org/</a></p>
+          </section>
+
+          <section>
+            <p><blockquote>Please note that this data is of a technical
+                nature and you will require a good level of computer skills
+                in order to be able to load and process the
+                data.</blockquote></p>
+          </section>
+
+          <section>
+            <pre>
+              malcolm@nessa:~/src/trains> ls -l
+              -rw-r--r-- 1 malcolm users    141128 May 16 13:16 TTISF723.ALF
+              -rw-r--r-- 1 malcolm users       152 May 18 22:55 TTISF723.DAT
+              -rw-r--r-- 1 malcolm users     35049 May 16 13:16 TTISF723.FLF
+              -rw-r--r-- 1 malcolm users 387108880 May 18 22:48 TTISF723.MCA
+              -rw-r--r-- 1 malcolm users    361032 May 16 13:16 TTISF723.MSN
+              -rw-r--r-- 1 malcolm users        10 Feb 23  2005 TTISF723.SET
+              -rw-r--r-- 1 malcolm users       980 Mar  4  2010 TTISF723.TSI
+              -rw-r--r-- 1 malcolm users   5856358 May 16 13:15 TTISF723.ZTR
+            </pre>
+
+            <pre>
+              malcolm@nessa:~/src/trains> wc -l *
+              2595 TTISF723.ALF
+              9 TTISF723.DAT
+              601 TTISF723.FLF
+              4720840 TTISF723.MCA
+              4298 TTISF723.MSN
+              1 TTISF723.SET
+              45 TTISF723.TSI
+              71419 TTISF723.ZTR
+              5001599 total
+            </pre>
+
+            <pre>
+              malcolm@nessa:~/src/trains> sed -ne '3000,3030 p' TTISF723.MCA
+              TIEDIDBRY01294900XEAST DIDSBURY             32524   0EDYEAST DIDSBURY           
+              TIEDIN81300932843MEDINBURGH SIGNAL E813     00000   0                           
+              TIEDIN81500932845XEDINBURGH SIGNAL E815     04307   0                           
+              TIEDIN90700932847QHAYMARKET CEN JN SIG EH90704231   0                           
+              TIEDINBUR00932800TEDINBURGH                 043032851EDBEDINBURGH               
+              TIEDINBUS56933700VEDINBURGH BUS STATION     00000   0EBS                        
+              TIEDINPRK00939500WEDINBURGH PARK            04039   0EDPEDINBURGH PARK          
+              TIEDINSTE56932876BEDINBURGH S.& T.E.        00000   0                           
+              TIEDMNGRN00694100DEDMONTON GREEN            51949   0EDREDMONTON GREEN          
+              TIEDNB   00547300MEDENBRIDGE                87736   0EBREDENBRIDGE              
+              TIEDNT   04535900REDENBRIDGE TOWN           87760   0EBTEDENBRIDGE TOWN         
+              TIEDPK   02505600PEDEN PARK                 88325   0EDNEDEN PARK               
+              TIEDULWCH01535800MEAST DULWICH              87610   0EDWEAST DULWICH            
+              TIEFARBUS08523410QEAST FARLEIGH - BUS STOP  00000   0                           
+              TIEFARLGH01523400NEAST FARLEIGH             89322   0EFLEAST FARLEIGH           
+            </pre>
+          </section>
+
+          <section>
+            <img width="800" src="assets/other-devs.jpg">
+          </section>
+
+          <section>
+            <img width="800" src="assets/train-delays-clapham-junction.jpg">
+          </section>
+
+          <section>
+            <a style="border:0; background:none" class="image">
+              <img width="320" style="border:0; background:none; -webkit-box-shadow:none" src="assets/iphone_emulator.png">
+            </a>
+          </section>
+
+          <section>
+            <img width="800" src="assets/449f927573754002bbe25ae55fc193e4.png"/>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <!-- Let's presume someone else has overcome the political
+                 hurdles, like copyright, data-ownership and governance
+                 - and now they come to you and ask you go ahead and
+                 expose some of your data to the world -->
+            <h2>Reality Check</h2>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 version="1.1"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 xmlns:cc="http://creativecommons.org/ns#"
+                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:svg="http://www.w3.org/2000/svg"
+                 width="800"
+                 height="600"
+                 id="architecture">
+              <defs
+                 id="defs4">
+                <filter
+                   id="filter1"
+                   inkscape:menu-tooltip="Partly opaque water color effect with bleed"
+                   inkscape:menu="Textures"
+                   inkscape:label="Gouache"
+                   color-interpolation-filters="sRGB">
+                  <feGaussianBlur
+                     id="feGaussianBlur3336"
+                     stdDeviation="3"
+                     result="result5"
+                     in="SourceGraphic" />
+                  <feTurbulence
+                     id="feTurbulence3338"
+                     result="result1"
+                     baseFrequency="0.02"
+                     type="fractalNoise"
+                     seed="0"
+                     numOctaves="3" />
+                  <feDisplacementMap
+                     id="feDisplacementMap3340"
+                     in2="result1"
+                     result="result3"
+                     in="SourceGraphic"
+                     xChannelSelector="R"
+                     yChannelSelector="G"
+                     scale="30" />
+                  <feComposite
+                     id="feComposite3342"
+                     in2="result1"
+                     result="result4"
+                     in="result3"
+                     operator="out" />
+                  <feComposite
+                     id="feComposite3344"
+                     in2="result4"
+                     result="result6"
+                     operator="arithmetic"
+                     k2="1"
+                     k1="0.3"
+                     k3="0.3" />
+                  <feComposite
+                     id="feComposite3346"
+                     in2="result5"
+                     in="result6"
+                     operator="over" />
+                </filter>
+              </defs>
+
+              <g>
+                <rect width="600" height="60" x="100" y="140" style="fill:#eaeaeb;filter:url(#filter1)"/>
+                <text x="400" y="170" xml:space="preserve" style="font-size:40px; font-family:Sans" text-anchor="middle" dominant-baseline="central">Data</text>
+              </g>
+            </svg>
+          </section>
+
+          <!-- But our data is often buried under layers of impenetrable rock -->
+          <section>
+            <img width="800" height="600" src="assets/svg/crust.svg">
+            <!-- Worse, it's too late. We've deployed these expensive application servers that entrench this thinking into our organisations -->
+          </section>
+
+          <section>
+            <img src="assets/appserver.gif">
+          </section>
+
+          <!-- So I copied Rich Hickey and I found a dictionary and looked up the definition of application server and here's the definition I found... -->
+
+	  <section>
+	    <h2>An Application Server</h2>
+            <!--
+                <p style="margin-top: 100px">
+	          <blockquote>An Application Server is a device for complecting data, presentation, conversational state, etc..</blockquote>
+                </p>
+                -->
+
+            <div>
+              <img src="assets/application-server.png">
+            </div>
+	  </section>
+
+
+          <section>
+          <!-- But I don't want all my data complected with
+               presentation. All too often I've been on the other side
+               of this equation - I've wanted to access data from other
+               systems at work. Often there's a UI, sometimes it's even
+               a nice modern UI with JQuery, but nobody seems interested
+               in providing me with 'just the data please'. And it's not
+               because people don't want to help, or there's security or
+               compliance reasons why they can't provide, it's often
+               just they don't think to do it. Perhaps all these UI
+               frameworks are a distraction.  -->
+
+          <!-- Islands in the stream -->
+            <img src="assets/remedy.jpg">
+          </section>
+
+          <section>
+            <h2>Starting over</h2>
+
+            <!-- 
+
+                 In many cases it might just be easier if we started again.
+
+              -->
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 version="1.1"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 xmlns:cc="http://creativecommons.org/ns#"
+                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:svg="http://www.w3.org/2000/svg"
+                 width="800"
+                 height="600"
+                 id="architecture">
+              <defs
+                 id="defs4">
+                <filter
+                   id="filter1"
+                   inkscape:menu-tooltip="Partly opaque water color effect with bleed"
+                   inkscape:menu="Textures"
+                   inkscape:label="Gouache"
+                   color-interpolation-filters="sRGB">
+                  <feGaussianBlur
+                     id="feGaussianBlur3336"
+                     stdDeviation="3"
+                     result="result5"
+                     in="SourceGraphic" />
+                  <feTurbulence
+                     id="feTurbulence3338"
+                     result="result1"
+                     baseFrequency="0.02"
+                     type="fractalNoise"
+                     seed="0"
+                     numOctaves="3" />
+                  <feDisplacementMap
+                     id="feDisplacementMap3340"
+                     in2="result1"
+                     result="result3"
+                     in="SourceGraphic"
+                     xChannelSelector="R"
+                     yChannelSelector="G"
+                     scale="30" />
+                  <feComposite
+                     id="feComposite3342"
+                     in2="result1"
+                     result="result4"
+                     in="result3"
+                     operator="out" />
+                  <feComposite
+                     id="feComposite3344"
+                     in2="result4"
+                     result="result6"
+                     operator="arithmetic"
+                     k2="1"
+                     k1="0.3"
+                     k3="0.3" />
+                  <feComposite
+                     id="feComposite3346"
+                     in2="result5"
+                     in="result6"
+                     operator="over" />
+                </filter>
+              </defs>
+              <g>
+                <rect width="600" height="60" x="100" y="140" style="fill:#eaeaeb;filter:url(#filter1)"/>
+                <text x="400" y="170" xml:space="preserve" style="font-size:40px; font-family:Sans" text-anchor="middle" dominant-baseline="central">Data</text>
+              </g>
+            </svg>
+          </section>
+
+          <section>
+            <h2>A &#x2018;data server&#x2019;</h2>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 version="1.1"
+                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                 xmlns:cc="http://creativecommons.org/ns#"
+                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:svg="http://www.w3.org/2000/svg"
+                 width="800"
+                 height="600"
+                 id="good-architecture">
+
+              <defs
+                 id="defs4">
+                <filter
+                   id="filter1"
+                   inkscape:menu-tooltip="Partly opaque water color effect with bleed"
+                   inkscape:menu="Textures"
+                   inkscape:label="Gouache"
+                   color-interpolation-filters="sRGB">
+                  <feGaussianBlur
+                     id="feGaussianBlur3336"
+                     stdDeviation="3"
+                     result="result5"
+                     in="SourceGraphic" />
+                  <feTurbulence
+                     id="feTurbulence3338"
+                     result="result1"
+                     baseFrequency="0.02"
+                     type="fractalNoise"
+                     seed="0"
+                     numOctaves="3" />
+                  <feDisplacementMap
+                     id="feDisplacementMap3340"
+                     in2="result1"
+                     result="result3"
+                     in="SourceGraphic"
+                     xChannelSelector="R"
+                     yChannelSelector="G"
+                     scale="30" />
+                  <feComposite
+                     id="feComposite3342"
+                     in2="result1"
+                     result="result4"
+                     in="result3"
+                     operator="out" />
+                  <feComposite
+                     id="feComposite3344"
+                     in2="result4"
+                     result="result6"
+                     operator="arithmetic"
+                     k2="1"
+                     k1="0.3"
+                     k3="0.3" />
+                  <feComposite
+                     id="feComposite3346"
+                     in2="result5"
+                     in="result6"
+                     operator="over" />
+                </filter>
+              </defs>
+              <g id="g">
+                <rect width="600" height="60" x="100" y="40" style="fill:#8080ff;filter:url(#filter1)"/>
+                <text x="400" y="70" xml:space="preserve" style="font-size:40px; font-family:Sans" text-anchor="middle" dominant-baseline="central">HTTP clients</text>
+              </g>
+              <g id="g">
+                <rect width="600" height="98" x="100" y="101" style="stroke:#000000;stroke-width:2px;fill:none"/>
+              </g>
+              <g id="g">
+                <rect width="600" height="40" x="100" y="160" style="fill:#ffef80;filter:url(#filter1)"/>
+                <text x="400" y="180" xml:space="preserve" style="font-size:32px; font-family:Sans" text-anchor="middle" dominant-baseline="central">REST library</text>
+              </g>
+              <g id="g">
+                <rect width="600" height="40" x="100" y="200" style="fill:#0000ff;filter:url(#filter1)"/>
+                <text x="400" y="220" xml:space="preserve" style="font-size:32px; font-family:Sans" text-anchor="middle" dominant-baseline="central">Resource model</text>
+              </g>
+              <g>
+                <rect width="600" height="60" x="100" y="240" style="fill:#eaeaeb;filter:url(#filter1)"/>
+                <text x="400" y="270" xml:space="preserve" style="font-size:40px; font-family:Sans" text-anchor="middle" dominant-baseline="central">Data</text>
+              </g>
+            </svg>
+
+          </section>
+
+          <section>
+            <h2>Clojure and REST</h2>
+          </section>
+
+          <section>
+            <h2>Shared values</h2>
+            <ol>
+              <li>Data is paramount.
+              <li>Immutability scales.
+              <li>Identity is separate from state.
+              <li>Prefer general interfaces over specific ones.
+            </ol>
+          </section>
+
+          <section>
+            <h2>REST library provides</h2>
+            <ol>
+              <li>Status determination</li>
+              <li>Content negotiation</li>
+              <li>Cache negotation</li>
+            </ol>
+            <p>Implements much of the 176-page HTTP spec.</p>
+
+          </section>
+
+          <section>
+            <h2>Q. Why a library and not just a set of Ring middleware?</h2>
+          </section>
+
+          <section>
+            <h2>A. Because HTTP is non-linear</h2>
+            <a class="image" href="assets/http-headers-status-v3.png">
+              <img width="800" height="600" src="assets/http-headers-status-v3.png">
+            </a>
+          </section>
+
+          <section>
+            <!-- At Clojure conj last year in his "Master Plan for
+                 Clojure Enterprise Mindshare Domination", Neal Ford
+                 said he thought Clojure could do with something that
+                 helps with RESTful integration. I agree.  Here's some
+                 of the REST libraries available today -->
+
+            <h2>Clojure REST Library options</h2>
+            <ul>
+              <li><a href="https://github.com/malcolmsparks/plugboard">https://github.com/malcolmsparks/plugboard</a></li>
+              <li><a href="https://github.com/ordnungswidrig/compojure-rest">https://github.com/ordnungswidrig/compojure-rest</a></li>
+              <li><a href="https://github.com/tnr-global/bishop">https://github.com/tnr-global/bishop</a></li>
+              <li>BankSimple ClothesLine</li>
+              <li>and others...
+            </ul>
+          </section>
+
+          <section>
+            <h2>The Curse Of Lisp</h2>
+            <!-- Here begins are rant about curse of lisp -->
+          </section>
+
+        </section>
+
+        <!-- Now I've got all that off my chest, I can see a few people getting
+             frustrated with that 'show me the code' expression on your faces. -->
+
+        <section>
+          <section>
+            <h2>compojure-rest</h2>
+            <ul>
+              <li>A Clojure REST library by Philipp Meier</li>
+              <li>Routing library agnostic</li>
+            </ul>
+          </section>
+
+          <section>
+            <div style="font-size: 32pt">
+              <p><span style="color: orange">
+                  allowed? 
+                  authorized? 
+                  can-post-to-missing? 
+                  can-put-to-missing? 
+                  charset-available?
+                conflict?
+                encoding-available?
+                existed?
+                exists?
+                known-content-type?
+                known-method?
+                language-available?
+                malformed?
+                method-allowed?
+                multiple-representations?
+                new?
+                post-redirect?
+                post-to-existing?
+                put-to-different-url?
+                respond-with-entity?
+                service-available?
+                uri-too-long?
+                valid-content-header?
+                valid-entity-length?</span>
+                <span style="color: lightgreen">
+                handle-created
+                handle-gone
+                handle-malformed
+                handle-method-not-allowed
+                handle-multiple-representations
+                handle-multiple-representations
+                handle-no-content
+                handle-not-acceptable
+                handle-not-found
+                handle-not-found
+                handle-not-implemented
+                handle-not-modified
+                handle-ok
+                handle-precondition-failed
+                handle-request-entity-too-large
+                handle-service-not-available
+                handle-unsupported-media-type
+                handle-uri-too-long
+                </span>
+<span style="color: red">create! delete! update!</span>
+<span style="color: gray">available-charsets
+                available-encodings
+                available-languages
+                available-media-types
+                etag
+                see-other
+</span>
+          </section>
+
+          <section>
+            <h2>Context</h2>
+            <pre style="font-size: 24pt">
+{:request {:uri ... 
+           :route-params ...}
+ :status 404
+ :message "Not found"
+ :representation {:mime-type "text/html"
+                  :language "it"
+                  :charset "utf-8"
+                  :encoding "gzip"}
+ :resource {:handle-ok ... 
+            :available-charsets ...}
+}
+            </pre>
+          </section>
+
+          <section>
+            <h2>Decisions return</h2>
+            <ul>
+<li>A boolean, determining the next step in the decision tree.
+<li>A map to be merged with the context, indicating a true value.
+<li>A vector pair containing a boolean as the first item and a map as the second item.
+</ul>
+
+          </section>
+
+          <section>
+            <h2>Handlers return</h2>
+            <p>A HandlerResponse</p>
+          </section>
+
+          <section>
+            <pre style="font-size: 14pt">
+X-Compojure-Rest-Trace
+        Decision :service-available?: true, 
+        Decision :known-method?: :get, 
+        Decision :uri-too-long?: false, 
+        Decision :method-allowed?: :get, 
+        Decision :malformed?: false, 
+        Decision :authorized?: true, 
+        Decision :allowed?: true, 
+        Decision :valid-content-header?: true, 
+        Decision :known-content-type?: true, 
+        Decision :valid-entity-length?: true, 
+        Decision :is-options?: false, 
+        Decision :accept-exists?: true, 
+        Decision :media-type-available?: {:representation {:media-type "application/xhtml+xml"}}, 
+        Decision :accept-language-exists?: true, 
+        Decision :language-available?: true, 
+        Decision :accept-charset-exists?: false, 
+        Decision :accept-encoding-exists?: true, 
+        Decision :encoding-available?: true, 
+        Decision :exists?: true, 
+        Decision :if-match-exists?: false, 
+        Decision :if-unmodified-since-exists?: false, 
+        Decision :if-none-match-exists?: false, 
+        Decision :if-modified-since-exists?: false, 
+        Decision :method-delete?: false, 
+        Decision :post-to-existing?: false, 
+        Decision :put-to-existing?: false, 
+        Decision :multiple-representations?: false
+</pre>
+          </section>
+        </section>
+
+        <section>
+	  <section>
+	    <h2>Show me some code!</h2>
+	  </section>
+
+          <!-- Now have 2 options, can show people on my laptop (best), or have snippets on slides in case of disaster -->
+	  <section>
+	    <h2>Hello World!</h2>
+	    <pre><code contenteditable>
+                (compojure.core/ANY "*"
+                    (fn [request] "Hello World!")
+            </code></pre>
+	    
+	  </section>
+
+	  <section>
+	    <h2>Hello George!</h2>
+	    <pre><code contenteditable>
+                (defresource hello-george
+                    :available-languages ["en" "bg"]
+                    :handle-ok (fn [context] 
+                                 (case (get-in context [:representation :language])
+                                   "en" "Hello George!"
+                                   "bg" "Zdravej, Georgi")))
+            </code></pre>
+	    
+	  </section>
+	  
+	  <section>
+	    <h2>Content</h2>
+	    <pre><code contenteditable>
+(defn get-dataset []
+  (let [[header & rows]
+        (->> "Downloads/olympic_games.tsv"
+             (file (System/getProperty "user.home"))
+             reader line-seq
+             (map #(split % #"\t")))]
+    (map #(zipmap header %) rows)))
+
+(defresource olympic-games
+    :handle-ok (fn [context] 
+                 (->> dataset
+                       (map #(select-keys % ["id" "name" "host_city" "mascot"]))
+                       (sort-by #(get % "name"))))
+            </code></pre>
+	  </section>
+
+	  <section>
+	    <h2>By mime-type</h2>
+	    <pre><code contenteditable>
+(defresource olympic-games-index-fancy
+    :available-media-types ["text/html" "application/xhtml+xml;q=0.8" "*/*;q=0.6"]
+    :handle-ok (fn [context]
+                   (case (get-in context [:representation :media-type])
+                     ("text/html" "application/xhtml+xml")
+                       (OlympicsHtmlPage. "examples.olympics.build_index()")
+                     (olympics/get-olympic-games-index))))
+            </code></pre>
+	  </section>
+
+          <section>
+	    <h2>A custom HandlerResponse</h2>
+	    <pre><code contenteditable>
+(defrecord OlympicsHtmlPage [main]
+    compojure-rest.resource/HandlerResponse
+    (as-response [this context]
+      {:body (html5
+               [:head
+                 [:title "Olympics"]
+                 [:script {:type "text/javascript" :src "/cljs/goog/base.js"}]
+                 [:script {:type "text/javascript" :src "/cljs/deps.js"}]
+                 (javascript-tag (format "goog.require('%s');"
+                 (reduce str (interpose "." (butlast (split main #"\."))))))]
+               [:body
+                 [:h1 "Olympics"]
+                 [:div#content]
+                   (javascript-tag main)])}))
+            </code></pre>
+          </section>
+
+          <section>
+	    <pre><code contenteditable>
+(defresource clojurescript-resource
+    :available-media-types ["text/javascript"]
+    :exists? (fn [context]
+               (let [path (get-in context [:request ::jspath])
+                     deps-file (io/file workdir "deps.js")]
+                 (when (= path "goog/base.js")
+                   (build (str srcdir) {:output-dir workdir :output-to (str deps-file)}))
+                 (let [f (io/file workdir path)]
+                     [(.exists f) {::file f}])))
+    :handle-ok (fn [context]
+                 (::file context))
+    :last-modified (fn [context]
+                     (.lastModified (::file context))))
+       </code></pre>
+          </section>
+
+        </section>
+	
+        <section>
+          <h2>Demo</h2>
+        </section>
+
+        <section>
+          <h2>Clojure and REST: Ideal travelling companions.</h2>
+          <!-- 
+
+               Clojure and REST are ideal travelling companions.
+
+               Neal Ford
+               said he thought Clojure could do with something that
+               helps with RESTful integration. I agree.  
+
+               As a flip side, I suggest that people producing REST services could do
+               with something that helps with simplicity, and need the
+               power of Clojure in their toolbox.
+            -->
+        </section>
+
+        <section>
+          <h2>What next?</h2>
+          <ul>
+            <li>Please help us improve compojure-rest by getting involved by contributing feedback, advice, code, tests, examples, documentation ... and suggestions for a better name.
+          </ul>
+        </section>
+
+        <section>
+          <h2>(map answer (take n questions)</h2>
+        </section>
+
+	<section>
+	  <h2>Thank you for listening</h2>
+	  <p class="inverted">https://github.com/malcolmsparks/euroclojure2012</p>
+          <div style="font-size: smaller; text-align: right">
+          <p>@malcolmsparks</p>
+          <p>malcolm@congreve.com</p>
+          <p>http://blog.malcolmsparks.com</p>
+	  <p class="inverted">https://github.com/malcolmsparks</p>
+          </div>
+	</section>
+      </div>
+
+      <!-- The navigational controls UI -->
+      <aside class="controls">
+	<a class="left" href="#">&#x25C4;</a>
+	<a class="right" href="#">&#x25BA;</a>
+	<a class="up" href="#">&#x25B2;</a>
+	<a class="down" href="#">&#x25BC;</a>
+      </aside>
+
+      <!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+      <div class="progress"><span></span></div>
+      
+    </div>
+    
+    <script src="js/reveal.js"></script>
+
+    <!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
+    <script src="lib/highlight.js"></script>
+    <script src="lib/classList.js"></script>
+    
+    <script>
+      // Parse the query string into a key/value object
+      var query = {};
+      location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+      query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+      } );
+
+      // Fires when a slide with data-state=customevent is activated
+      /*
+      Reveal.addEventListener( 'customevent', function() {
+      alert( '"customevent" has fired' );
+      } );
+      */
+
+      // Fires each time a new slide is activated
+      Reveal.addEventListener( 'slidechanged', function( event ) {
+      // event.indexh & event.indexv
+      } );
+
+      Reveal.initialize({
+      // Display controls in the bottom right corner
+      controls: true,
+
+      // Display a presentation progress bar
+      progress: true,
+
+      // If true; each slide will be pushed to the browser history
+      history: true,
+
+      // Loops the presentation, defaults to false
+      loop: false,
+
+      // Flags if mouse wheel navigation should be enabled
+      mouseWheel: true,
+
+      // Apply a 3D roll to links on hover
+      rollingLinks: true,
+
+      // UI style
+      theme: query.theme || 'default', // default/neon
+
+      // Transition style
+      transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+      });
+
+      hljs.initHighlightingOnLoad();
+    </script>
+
+  </body>
+</html>
