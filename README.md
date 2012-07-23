@@ -10,7 +10,10 @@ http://creativecommons.org/licenses/by-nc-sa/3.0/
 
 # compojure-rest
 
-This presentation discusses the compojure-rest library which can be found at https://github.com/ordnungswidrig/compojure-rest
+This presentation discusses the compojure-rest library. Since the EuroClojure 2012 this has been renamed to _Liberator_ and can be found at https://github.com/ordnungswidrig/liberator and https://github.com/malcolmsparks/liberator. 
+
+At the time of writing we are still code-reviewing and merging code, so
+please e-mail me directly and I'll let you know the current status.
 
 # Feedback
 
